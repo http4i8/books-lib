@@ -1,0 +1,23 @@
+@import '../../../styles/variables.scss';
+
+.dropdown__itemBtn {
+  display: flex;
+  justify-content: center;
+
+  min-width: 122px;
+  padding: 8px 0px;
+  border-bottom: solid 1px black;
+
+  background-color: $bg;
+  cursor: pointer;
+
+  color: $grey;
+
+  &:not(:last-child) {
+    border-bottom: solid 1px black;
+  }
+
+  &:hover {
+    color: $white;
+  }
+}

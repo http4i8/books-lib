@@ -1,0 +1,64 @@
+@import '../../../../../../styles/variables.scss';
+
+.editBlock {
+  display: flex;
+
+  button:first-child {
+    padding-right: 10px;
+  }
+  button {
+    background: transparent;
+    cursor: pointer;
+
+    color: $grey;
+
+    &:hover {
+      color: $white;
+    }
+  }
+
+  &__del {
+    padding: 5px;
+
+    font-size: 40px;
+    line-height: 18px;
+  }
+
+  &__del:hover:before {
+    color: $white;
+  }
+}
+
+@media (width < 992px) {
+  .editBlock {
+    position: absolute;
+    right: 11px;
+    top: 8px;
+    display: flex;
+
+    button:first-child {
+      padding-right: 10px;
+    }
+    button {
+      background: transparent;
+      cursor: pointer;
+
+      color: $grey;
+
+      &:hover {
+        color: $white;
+      }
+    }
+
+    &__del {
+      padding: 5px;
+
+      font-size: 40px;
+      line-height: 18px;
+
+      &:hover:before {
+        color: $white;
+      }
+    }
+  }
+}

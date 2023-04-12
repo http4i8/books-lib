@@ -1,0 +1,19 @@
+@import '../../../../../../styles/variables.scss',
+  '../../../../../../styles/mixins.scss';
+
+.bookCard {
+  &__block:nth-child(odd) {
+    background: rgba(69, 71, 75, 0.26);
+
+    color: $white;
+  }
+
+  &__booksInfo {
+    @include columns;
+    align-items: center;
+  }
+
+  &__score {
+    text-align: center;
+  }
+}

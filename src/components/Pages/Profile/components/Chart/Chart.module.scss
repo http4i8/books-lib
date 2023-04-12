@@ -1,0 +1,11 @@
+@import '../../../../styles/mixins.scss', '../../../../styles/variables.scss';
+
+.chart {
+  padding: 20px 30px;
+
+  h2 {
+    font-weight: 600;
+    text-align: center;
+    color: $white;
+  }
+}

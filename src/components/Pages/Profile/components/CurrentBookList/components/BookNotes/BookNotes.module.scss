@@ -1,0 +1,59 @@
+@import '../../../../../../styles/variables.scss';
+
+.notes {
+  position: relative;
+  grid-column: 2/-1;
+
+  font-size: 18px;
+
+  &__button {
+    grid-area: notes;
+
+    border-bottom: 1px dashed $grey;
+
+    background-color: transparent;
+    cursor: pointer;
+
+    color: $grey;
+
+    &:hover {
+      border-color: $white;
+
+      color: $white;
+    }
+  }
+
+  &__note {
+    position: absolute;
+    z-index: 1;
+    top: 100%;
+    left: 0;
+    right: 0;
+
+    opacity: 0;
+    transform-origin: top center;
+
+    transition: opacity 0.5s, transform 0.5s;
+
+    padding: 10px;
+    border: 1px solid $block;
+    border-radius: $border-r;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+
+    background: $block;
+  }
+
+  &__note.open {
+    opacity: 1;
+    transform: translateY(0);
+
+    overflow-y: scroll;
+
+    max-height: 500px;
+  }
+
+  &__note.closed {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}

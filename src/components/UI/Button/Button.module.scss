@@ -1,0 +1,31 @@
+@import '../../styles/mixins.scss', '../../styles/variables.scss';
+
+.btn {
+  @include border;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 54px;
+  min-width: 323px;
+
+  background: $gradient;
+
+  color: $block;
+  font-weight: 600;
+
+  &:hover {
+    transition: $btn-transition;
+
+    background: $gradient-reverse;
+    cursor: pointer;
+  }
+  &:disabled {
+    transition: $btn-transition;
+    cursor: not-allowed;
+    background: $block-grey;
+
+    color: $grey;
+  }
+}

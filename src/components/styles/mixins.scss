@@ -1,0 +1,31 @@
+@mixin large {
+  font-size: 34px;
+  line-height: 32px;
+}
+
+@mixin medium {
+  font-size: 30px;
+  line-height: 30px;
+}
+
+@mixin small {
+  font-size: 18px;
+  line-height: 24px;
+}
+
+@mixin border {
+  border: 1px $block-grey solid;
+  border-radius: 8px;
+}
+
+@mixin border-b {
+  border: 1px $white solid;
+  border-radius: 8px;
+}
+
+@mixin columns {
+  display: grid;
+  grid-template-columns: 5fr 35fr 25fr 10fr 19fr 6fr;
+  gap: 0 $indent-block;
+  padding: 10px;
+}

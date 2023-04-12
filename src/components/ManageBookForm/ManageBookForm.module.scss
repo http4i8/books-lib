@@ -1,0 +1,42 @@
+@import '../styles/mixins.scss', '../styles/variables.scss';
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  padding: 40px 60px;
+
+  h2 {
+    @include large;
+
+    text-align: center;
+  }
+
+  &__star {
+    padding-top: 20px;
+
+    text-align: center;
+  }
+
+  &__miniBlock {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    padding-top: 30px;
+    margin-bottom: $input-bottom;
+  }
+
+  &__rate {
+    display: flex;
+    flex-direction: column;
+
+    padding-left: 30px;
+  }
+
+  &__button {
+    display: flex;
+    justify-content: center;
+  }
+}

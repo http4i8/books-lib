@@ -1,0 +1,52 @@
+@import '../../styles/variables.scss';
+
+.form {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding-top: 35px;
+  padding: 70px 100px;
+
+  &__error {
+    position: absolute;
+    top: 12px;
+
+    color: $orange;
+    font-weight: 600;
+  }
+  &__field {
+    min-width: 323px;
+  }
+
+  &__data {
+    display: flex;
+    flex-direction: column;
+
+    padding-bottom: 40px;
+  }
+
+  &__passwordReq {
+    label {
+      font-size: 16px;
+      font-weight: 600;
+      color: $white;
+    }
+
+    ul {
+      padding-left: 30px;
+    }
+
+    li {
+      font-size: 14px;
+      line-height: 20px;
+      list-style-type: disc;
+      color: $orange;
+    }
+
+    .highlight {
+      color: rgb(17, 153, 51);
+    }
+  }
+}

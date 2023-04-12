@@ -1,0 +1,103 @@
+@import '../../styles/variables.scss';
+
+.dropdown {
+  position: relative;
+
+  &__wrapper {
+    position: relative;
+  }
+
+  &__list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1;
+
+    opacity: 0;
+
+    overflow: hidden;
+
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+
+    height: 0;
+    max-width: 122px;
+    border: 1px solid $block;
+    border-radius: 8px;
+    margin-top: 2px;
+    box-shadow: 10px 10px 15px 0 rgba(rgb(20, 20, 20), 0.5);
+
+    &.open {
+      opacity: 1;
+
+      height: auto;
+    }
+  }
+
+  &__title {
+    position: absolute;
+    top: -14px;
+
+    transition: all 0.4s ease-in-out;
+
+    font-size: 14px;
+    font-weight: 600;
+    color: $grey;
+
+    &.active {
+      border-image: $gradient;
+      border-image-slice: 1;
+
+      color: $orange;
+    }
+  }
+}
+
+.dropdown__btn {
+  display: flex;
+
+  min-width: 122px;
+  padding: 8px 0 5px 0;
+  border-bottom: 2px solid $grey;
+
+  background: transparent;
+  cursor: pointer;
+
+  color: $white;
+
+  & div {
+    min-width: 90px;
+
+    text-align: left;
+  }
+  &:focus {
+    border-image: $gradient;
+    border-image-slice: 1;
+  }
+  &:after {
+    content: '';
+
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+
+    transition: all 0.3s;
+
+    border: solid $white;
+    border-width: 0 1px 1px 0;
+    margin-top: 10px;
+    margin-left: 14px;
+    padding: 5px;
+  }
+
+  &.change {
+    border-image: $gradient;
+    border-image-slice: 1;
+
+    color: $white;
+    &:after {
+      transform: rotate(-135deg);
+      -webkit-transform: rotate(-135deg);
+
+      margin-top: 16px;
+    }
+  }
+}

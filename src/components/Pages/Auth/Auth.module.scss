@@ -1,0 +1,29 @@
+@import '../../styles/mixins.scss', '../../styles/variables.scss';
+
+.auth {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  padding-top: 60px;
+
+  &__title {
+    @include large;
+
+    color: $white;
+  }
+
+  &__existingUser,
+  &__newUser {
+    a {
+      span {
+        font-weight: bold;
+      }
+    }
+
+    &:hover {
+      color: $orange;
+    }
+  }
+}

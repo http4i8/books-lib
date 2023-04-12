@@ -1,0 +1,36 @@
+@import '../styles/mixins.scss', '../styles/variables.scss';
+
+.list {
+  display: grid;
+  grid-auto-columns: minmax(210px, auto);
+
+  &__button {
+    width: 100%;
+    padding: 20px 15px;
+
+    background: transparent;
+    cursor: pointer;
+
+    color: $grey;
+
+    &:hover {
+      transition: $btn-transition;
+
+      border-radius: $border-r;
+
+      background: $block-grey;
+      color: $white;
+    }
+
+    &.active {
+      transition: $btn-transition;
+
+      border-radius: $border-r;
+
+      background: $gradient;
+
+      font-weight: 600;
+      color: $block;
+    }
+  }
+}

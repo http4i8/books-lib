@@ -1,0 +1,20 @@
+@import '../../styles/variables.scss';
+
+.container {
+  display: flex;
+  justify-content: center;
+
+  width: 100%;
+  margin-bottom: $indent-block;
+  padding: 117px 95px 0 95px;
+
+  color: $grey;
+}
+
+// -----------------------
+
+@media (width < 1025px) {
+  .container {
+    padding: 117px $indent-block 0 $indent-block;
+  }
+}

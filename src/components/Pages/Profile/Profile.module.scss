@@ -1,0 +1,47 @@
+@import '../../styles/mixins.scss', '../../styles/variables.scss';
+
+.profile {
+  max-width: 1440px;
+  width: 100%;
+
+  &__container {
+    display: grid;
+    grid-template-columns: 1fr 8fr;
+    gap: $indent-block $indent-block;
+    grid-template-areas:
+      'button chart chart'
+      'button chart chart'
+      'list list list';
+  }
+
+  &_buttons {
+    grid-area: button;
+  }
+  &__chart {
+    grid-area: chart;
+  }
+  &__list {
+    grid-area: list;
+  }
+}
+
+// -----------------------------
+
+@media (width < 1070px) {
+  .profile__chart {
+    align-self: center;
+  }
+
+  .profile__container {
+    grid-template-areas:
+      'chart chart chart'
+      'list list list';
+    gap: $indent-block 0;
+  }
+}
+
+@media (max-width: 425px) {
+  .profile__chart {
+    display: none;
+  }
+}

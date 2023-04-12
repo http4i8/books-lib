@@ -1,0 +1,13 @@
+@import '../../../styles/variables.scss';
+
+.logout__btn {
+  background: transparent;
+
+  color: $white;
+
+  &:hover {
+    cursor: pointer;
+
+    color: $orange;
+  }
+}

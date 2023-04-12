@@ -1,0 +1,66 @@
+@import '../../../../styles/mixins.scss', '../../../../styles/variables.scss';
+
+.bookList {
+  margin-bottom: $indent-block;
+
+  &__container {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+
+    padding: $indent-block;
+
+    h2 {
+      @include medium;
+
+      color: $white;
+    }
+  }
+
+  &__search {
+    width: clamp(160px, 50%, 50%);
+    padding-bottom: $input-bottom;
+    margin: $indent-block 0;
+  }
+
+  &__list {
+    justify-self: stretch;
+  }
+
+  &__names {
+    @include columns;
+
+    padding-bottom: 10px;
+
+    div {
+      font-size: 22px;
+      font-weight: 600;
+      color: $white;
+    }
+  }
+
+  &__fallback {
+    text-align: center;
+    padding: 20px;
+  }
+}
+
+// ----------------------------
+
+@media (width < 992px) {
+  .bookList {
+    &__container {
+      padding: $indent-block 10px;
+    }
+
+    &__names {
+      display: none;
+    }
+  }
+}
+
+@media (min-width: 1440px) {
+  .bookList__score {
+    text-align: center;
+  }
+}
