@@ -3,10 +3,10 @@ import { useEffect, useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import Joi from 'joi';
 import { joiResolver } from '@hookform/resolvers/joi';
-import axios, { AxiosError } from 'axios';
+import { AxiosError } from 'axios';
 import { useDispatch } from 'react-redux';
 
-import { AppDispatch, fetchBooksList } from '../../store';
+import { addBook, AppDispatch, editBook, getBookById } from '../../store';
 import {
   Card,
   Input,
@@ -18,7 +18,6 @@ import {
 } from '../UI';
 
 import { BookRecord, Response, StatusItem } from '../../types';
-import { BASE_URL } from '../../constants';
 
 import classes from './ManageBookForm.module.scss';
 
@@ -65,7 +64,7 @@ export const ManageBookForm = ({ title, bookId, onClose }: BookFormProps) => {
   const {
     register,
     handleSubmit,
-    reset,
+    setValue,
     formState: { errors },
   } = useForm<BookRecord>({ resolver: joiResolver(schema) });
 
@@ -73,30 +72,37 @@ export const ManageBookForm = ({ title, bookId, onClose }: BookFormProps) => {
 
   useEffect(() => {
     if (bookId) {
-      axios.get(`${BASE_URL}/books/${bookId}`).then((response) => {
-        reset({
-          ...response.data,
+      dispatch(getBookById(bookId))
+        .unwrap()
+        .then((book: BookRecord) => {
+          setValue('title', book.title, { shouldDirty: true });
+          setValue('author', book.author, { shouldDirty: true });
           // to fix
-          date: new Date(response.data.date).toISOString().slice(0, 10),
+          setValue('date', new Date(book.date).toISOString().slice(0, 10), {
+            shouldDirty: true,
+          });
+          setValue('notes', book.notes, { shouldDirty: true });
+          const foundStatus = statusList.find((elm) => elm.id === book.status);
+          setSelectedStatus(foundStatus || statusList[0]);
+          setSelectedRate(book.rate);
         });
-        const foundStatus = statusList.find(
-          (elm) => elm.id === response.data.status
-        );
-        setSelectedStatus(foundStatus || statusList[0]);
-        setSelectedRate(response.data.rate);
-      });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [bookId]);
 
   const onSubmit: SubmitHandler<BookRecord> = async (data) => {
     try {
-      const responseData = {
+      const requestData: BookRecord = {
         ...data,
         rate: selectedRate,
         status: selectedStatus.id,
+        id: Number(bookId),
       };
-      await axios.post(`${BASE_URL}/books/add`, responseData);
-      dispatch(fetchBooksList());
+      if (bookId) {
+        dispatch(editBook(requestData));
+      } else {
+        dispatch(addBook(requestData));
+      }
       onClose();
     } catch (error: unknown) {
       const err = error as AxiosError<Response<void>>;
