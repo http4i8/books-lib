@@ -44,6 +44,15 @@ export const editBook = (book: BookRecord) => async (dispatch: any) => {
   }
 };
 
+export const deleteBook = (id: number) => async (dispatch: any) => {
+  try {
+    await axios.delete(`${BASE_URL}/books/${id}`);
+    dispatch(fetchBooksList());
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 interface BooksListState {
   booksList: [];
 }
