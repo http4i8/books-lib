@@ -1,28 +1,46 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+
+import { useSearchParams } from 'react-router-dom';
 
 import { StatusName } from './StatusName';
 import { Card } from '../UI';
 
-import { bookStatus } from '../../constants';
+import { entriesHandler } from '../../utils/entriesHandler';
+import { statusList } from '../../constants';
+import { StatusItem } from '../../types';
 
 import classes from './BookStatus.module.scss';
 
 export const BookStatus = () => {
-  const [isActive, setIsActive] = useState(bookStatus[0]);
+  const [isActive, setIsActive] = useState({ id: 999, title: '' });
 
-  const onActiveHandler = (title: string) => {
-    setIsActive(title);
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const onActiveHandler = (status: StatusItem) => {
+    const entries = entriesHandler(searchParams);
+
+    setSearchParams({
+      ...entries,
+      list: status.id.toString(),
+    });
   };
+
+  useEffect(() => {
+    const list = searchParams.get('list');
+    const status = statusList.find((elm) => elm.id === Number(list));
+
+    setIsActive(status || statusList[0]);
+  }, [searchParams]);
 
   return (
     <Card>
       <ul className={classes.lists}>
-        {bookStatus.map((status) => (
+        {statusList.map((status) => (
           <StatusName
             onClick={() => onActiveHandler(status)}
-            key={status}
-            title={status}
-            isActive={isActive}
+            key={status.id}
+            title={status.title}
+            isActive={isActive.title}
           />
         ))}
       </ul>

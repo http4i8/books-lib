@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 
+import { useSearchParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 import { AppDispatch, fetchBooksList } from '../../../../../store';
@@ -7,6 +8,7 @@ import { BookCards, MobileBookCards } from './components';
 import { useViewport } from '../../../../../hooks';
 import { Card, Input } from '../../../../UI';
 
+import { entriesHandler } from '../../../../../utils/entriesHandler';
 import { BookRecord } from '../../../../../types';
 
 import classes from './CurrentBookList.module.scss';
@@ -16,14 +18,28 @@ interface BookProps {
 }
 
 export const CurrentBookList: React.FC<BookProps> = ({ data }) => {
+  const [searchParams, setSearchParams] = useSearchParams();
+
   const { width } = useViewport();
   const breakpoint = 992;
 
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
+    const list = searchParams.get('list');
+    if (!list) {
+      const entries = entriesHandler(searchParams);
+      setSearchParams({
+        ...entries,
+        list: '1',
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
     dispatch(fetchBooksList());
-  }, [dispatch]);
+  }, [searchParams, dispatch]);
 
   // temp
   const currentStatus = 'Completed';

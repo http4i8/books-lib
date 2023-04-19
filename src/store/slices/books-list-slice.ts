@@ -7,7 +7,8 @@ import { BookRecord } from './../../types/bookRecord';
 export const fetchBooksList = createAsyncThunk(
   'books/fetchBooksList',
   async () => {
-    const response = await axios.get(`${BASE_URL}/books/list`);
+    const params = window.location.search;
+    const response = await axios.get(`${BASE_URL}/books/list${params}`);
     return response.data;
   }
 );
