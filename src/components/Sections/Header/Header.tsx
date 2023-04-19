@@ -21,8 +21,8 @@ export const Header = () => {
             </a>
           </h1>
         </div>
-        {width >= breakpoint ? <Logout /> : ''}
-        {width < breakpoint ? <NavMobile /> : ''}
+        {width > breakpoint && <Logout />}
+        {width <= breakpoint && <NavMobile />}
       </div>
     </nav>
   );

@@ -49,14 +49,12 @@ export const Input = ({
       <label htmlFor={id} className={classes.input__label}>
         {label}
       </label>
-      {type === 'password' && eye ? (
+      {type === 'password' && eye && (
         <button
           type="button"
           className={eye === close ? close : open}
           onClick={toggleEye}
         ></button>
-      ) : (
-        ''
       )}
       {error && <p className={classes.input__error}>{error}</p>}
     </div>

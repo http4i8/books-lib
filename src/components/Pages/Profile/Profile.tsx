@@ -17,13 +17,11 @@ export const Profile = () => {
     <Container>
       <div className={classes.profile}>
         <main className={classes.profile__container}>
-          {width > breakpoint ? (
+          {width > breakpoint && (
             <div className={classes.profile__buttons}>
               <AddNewBookBtn />
               <BookStatus />
             </div>
-          ) : (
-            ''
           )}
           <div className={classes.profile__chart}>
             <Chart />
