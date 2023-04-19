@@ -17,7 +17,8 @@ import {
   Modal,
 } from '../UI';
 
-import { BookRecord, Response, StatusItem } from '../../types';
+import { BookRecord, Response } from '../../types';
+import { statusList } from '../../constants';
 
 import classes from './ManageBookForm.module.scss';
 
@@ -26,14 +27,6 @@ interface BookFormProps {
   bookId?: number;
   onClose: () => void;
 }
-
-// temp
-const statusList: StatusItem[] = [
-  { id: 1, title: 'Completed' },
-  { id: 2, title: 'Planned' },
-  { id: 3, title: 'In process' },
-  { id: 4, title: 'Dropped' },
-];
 
 const bookField: Joi.StringSchema = Joi.string()
   .required()

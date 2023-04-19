@@ -1,2 +1,2 @@
-export * from './bookStatus';
+export * from './statusList';
 export * from './baseUrl';
