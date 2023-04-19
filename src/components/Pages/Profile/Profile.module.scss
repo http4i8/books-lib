@@ -27,7 +27,7 @@
 
 // -----------------------------
 
-@media (width < 1070px) {
+@media (max-width: 1070px) {
   .profile__chart {
     align-self: center;
   }

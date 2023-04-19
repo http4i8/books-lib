@@ -25,6 +25,8 @@
 
   &__content {
     position: relative;
+
+    margin-left: 150px;
   }
 
   &__brand {
@@ -55,17 +57,17 @@
 
 // --------------------------
 
-@media (width < 1070px) {
-  .header__container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+@media (max-width: 1070px) {
+  .header {
+    &__container {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
 
-    padding: 0 60px;
-  }
-}
-@media (width > 1069px) {
-  .header__content {
-    margin-left: 150px;
+      padding: 0 60px;
+    }
+    &__content {
+      margin-left: 0;
+    }
   }
 }
