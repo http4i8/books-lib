@@ -2,7 +2,7 @@ import classes from './Button.module.scss';
 
 interface BtnProps {
   type: string;
-  disabled?: any;
+  disabled?: boolean;
   children: string | JSX.Element | JSX.Element[];
   onClick?: () => void;
 }
