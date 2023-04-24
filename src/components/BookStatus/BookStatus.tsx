@@ -1,7 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 import { useSearchParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { AppDispatch, changeListSelector, listActions } from '../../store';
 import { StatusName } from './StatusName';
 import { Card } from '../UI';
 
@@ -12,9 +14,11 @@ import { StatusItem } from '../../types';
 import classes from './BookStatus.module.scss';
 
 export const BookStatus = () => {
-  const [isActive, setIsActive] = useState({ id: 999, title: '' });
+  const currentList = useSelector(changeListSelector);
 
   const [searchParams, setSearchParams] = useSearchParams();
+
+  const dispatch = useDispatch<AppDispatch>();
 
   const onActiveHandler = (status: StatusItem) => {
     const entries = entriesHandler(searchParams);
@@ -27,10 +31,9 @@ export const BookStatus = () => {
 
   useEffect(() => {
     const list = searchParams.get('list');
-    const status = statusList.find((elm) => elm.id === Number(list));
 
-    setIsActive(status || statusList[0]);
-  }, [searchParams]);
+    dispatch(listActions.changeCurrentList(list));
+  }, [searchParams, dispatch]);
 
   return (
     <Card>
@@ -40,7 +43,7 @@ export const BookStatus = () => {
             onClick={() => onActiveHandler(status)}
             key={status.id}
             title={status.title}
-            isActive={isActive.title}
+            isActive={currentList.title}
           />
         ))}
       </ul>

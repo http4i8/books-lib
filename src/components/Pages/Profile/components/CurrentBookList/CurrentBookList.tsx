@@ -1,9 +1,13 @@
 import { useEffect } from 'react';
 
 import { useSearchParams } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { AppDispatch, fetchBooksList } from '../../../../../store';
+import {
+  AppDispatch,
+  changeListSelector,
+  fetchBooksList,
+} from '../../../../../store';
 import { BookCards, MobileBookCards } from './components';
 import { useViewport } from '../../../../../hooks';
 import { Card, Input } from '../../../../UI';
@@ -19,6 +23,8 @@ interface BookProps {
 
 export const CurrentBookList: React.FC<BookProps> = ({ data }) => {
   const [searchParams, setSearchParams] = useSearchParams();
+
+  const currentList = useSelector(changeListSelector);
 
   const { width } = useViewport();
   const breakpoint = 992;
@@ -41,9 +47,6 @@ export const CurrentBookList: React.FC<BookProps> = ({ data }) => {
     dispatch(fetchBooksList());
   }, [searchParams, dispatch]);
 
-  // temp
-  const currentStatus = 'Completed';
-
   return (
     <div className={classes.bookList}>
       <Card>
@@ -51,7 +54,7 @@ export const CurrentBookList: React.FC<BookProps> = ({ data }) => {
           <h2 className={classes.bookList__fallback}>Found no books.</h2>
         ) : (
           <div className={classes.bookList__container}>
-            <h2>{currentStatus}</h2>
+            <h2>{currentList.title}</h2>
             <div className={classes.bookList__search}>
               <Input type="text" id="search" placeholder="Search..." />
             </div>
