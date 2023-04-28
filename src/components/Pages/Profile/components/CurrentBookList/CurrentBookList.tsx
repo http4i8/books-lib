@@ -8,9 +8,9 @@ import {
   changeListSelector,
   fetchBooksList,
 } from '../../../../../store';
-import { BookCards, MobileBookCards } from './components';
+import { BookCards, MobileBookCards, SearchBar } from './components';
 import { useViewport } from '../../../../../hooks';
-import { Card, Input } from '../../../../UI';
+import { Card } from '../../../../UI';
 
 import { entriesHandler } from '../../../../../utils/entriesHandler';
 import { BookRecord } from '../../../../../types';
@@ -50,14 +50,12 @@ export const CurrentBookList: React.FC<BookProps> = ({ data }) => {
   return (
     <div className={classes.bookList}>
       <Card>
-        {data?.length === 0 ? (
-          <h2 className={classes.bookList__fallback}>Found no books.</h2>
-        ) : (
-          <div className={classes.bookList__container}>
-            <h2>{currentList.title}</h2>
-            <div className={classes.bookList__search}>
-              <Input type="text" id="search" placeholder="Search..." />
-            </div>
+        <div className={classes.bookList__container}>
+          <h2>{currentList.title}</h2>
+          <SearchBar />
+          {data?.length === 0 ? (
+            <p className={classes.bookList__fallback}>Found no books.</p>
+          ) : (
             <div className={classes.bookList__list}>
               <div className={classes.bookList__names}>
                 <div>#</div>
@@ -72,8 +70,8 @@ export const CurrentBookList: React.FC<BookProps> = ({ data }) => {
                 <MobileBookCards data={data} />
               )}
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </Card>
     </div>
   );

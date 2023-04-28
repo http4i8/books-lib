@@ -13,6 +13,9 @@ interface InputProps {
   autoComplete?: string;
   placeholder?: string;
   error?: string;
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
+  onClick?: () => void;
+  value?: string;
 }
 
 export const Input = ({
@@ -23,6 +26,9 @@ export const Input = ({
   autoFocus,
   placeholder,
   error,
+  onChange,
+  onClick,
+  value,
 }: InputProps) => {
   const close = classes.input__iconEye;
   const open = classes.input__iconEye_open;
@@ -45,6 +51,8 @@ export const Input = ({
         className={classes.input__field}
         autoFocus={type === 'email' ? autoFocus : false}
         autoComplete="off"
+        onChange={onChange}
+        value={value}
       />
       <label htmlFor={id} className={classes.input__label}>
         {label}
@@ -55,6 +63,11 @@ export const Input = ({
           className={eye === close ? close : open}
           onClick={toggleEye}
         ></button>
+      )}
+      {id === 'search' && !!value?.length && (
+        <button onClick={onClick} type="button" className={classes.input__del}>
+          ×
+        </button>
       )}
       {error && <p className={classes.input__error}>{error}</p>}
     </div>

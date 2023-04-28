@@ -16,6 +16,21 @@
     pointer-events: none;
   }
 
+  &__del {
+    font-size: 40px;
+    position: absolute;
+    background: transparent;
+    color: $grey;
+    right: 5px;
+    line-height: 20px;
+    bottom: 12px;
+
+    &:hover {
+      color: $white;
+      cursor: pointer;
+    }
+  }
+
   &__error {
     position: absolute;
     right: 0;

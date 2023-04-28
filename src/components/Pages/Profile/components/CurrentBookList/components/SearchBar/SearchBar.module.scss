@@ -1,0 +1,7 @@
+@import '/src/styles/variables.scss';
+
+.search {
+  width: clamp(160px, 50%, 50%);
+  padding-bottom: $input-bottom;
+  margin: $indent-block 0;
+}
