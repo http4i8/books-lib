@@ -48,7 +48,7 @@ export const SignupForm = () => {
     register,
     handleSubmit,
     watch,
-    formState: { errors, isValid, isDirty, isSubmitting },
+    formState: { errors, isValid, isSubmitting },
   } = useForm<RegUser>({
     mode: 'onChange',
     resolver: joiResolver(schema),
@@ -166,7 +166,7 @@ export const SignupForm = () => {
           </div>
         </div>
 
-        <Button type="submit" disabled={!isDirty || !isValid}>
+        <Button type="submit" disabled={!isValid}>
           {isSubmitting ? <Spinner /> : 'Sign up'}
         </Button>
       </form>
