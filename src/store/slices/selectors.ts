@@ -13,3 +13,8 @@ export const changeListSelector = createSelector(
   selectSelf,
   (state) => state.currentList.currentList
 );
+
+export const chartSelector = createSelector(
+  selectSelf,
+  (state) => state.chart.data
+);

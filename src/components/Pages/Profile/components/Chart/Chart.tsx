@@ -1,3 +1,6 @@
+import { useEffect, useState } from 'react';
+
+import { useDispatch, useSelector } from 'react-redux';
 import { Bar } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
@@ -9,6 +12,12 @@ import {
   Legend,
 } from 'chart.js';
 
+import {
+  AppDispatch,
+  booksListSelector,
+  chartSelector,
+  fetchChart,
+} from '../../../../../store';
 import { Card } from '../../../../UI';
 
 import classes from './Chart.module.scss';
@@ -46,32 +55,46 @@ const labels = [
   'December',
 ];
 
-// temp
-export const data = {
+const data = {
   labels,
   datasets: [
     {
       label: 'Read',
-      data: [12, 19, 3, 5, 2, 3, 0, 12, 3, 11, 2],
+      data: [],
       backgroundColor: '#f9f8717a',
-    },
-    {
-      label: 'Dropped',
-      data: [2, 1, 0, 0, 4, 0, 0, 2, 3, 0, 0],
-      backgroundColor: '#d57d679c',
     },
   ],
 };
 
 export const Chart = () => {
-  // temp
+  const dispatch = useDispatch<AppDispatch>();
+  const chartData = useSelector(chartSelector);
+
+  const [chart, setChart] = useState(data);
+
   const date = '2023';
+
+  useEffect(() => {
+    dispatch(fetchChart());
+  }, []);
+
+  useEffect(() => {
+    setChart({
+      ...chart,
+      datasets: [
+        {
+          ...chart.datasets[0],
+          data: chartData,
+        },
+      ],
+    });
+  }, [chartData]);
 
   return (
     <Card>
       <div className={classes.chart}>
         <h2>{date}</h2>
-        <Bar options={options} data={data} redraw={true} />
+        <Bar options={options} data={chart} redraw={true} />
       </div>
     </Card>
   );
