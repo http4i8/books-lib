@@ -68,7 +68,9 @@ const data = {
 
 export const Chart = () => {
   const dispatch = useDispatch<AppDispatch>();
+
   const chartData = useSelector(chartSelector);
+  const bookListData = useSelector(booksListSelector);
 
   const [chart, setChart] = useState(data);
 
@@ -76,7 +78,8 @@ export const Chart = () => {
 
   useEffect(() => {
     dispatch(fetchChart());
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [bookListData]);
 
   useEffect(() => {
     setChart({
@@ -88,6 +91,7 @@ export const Chart = () => {
         },
       ],
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [chartData]);
 
   return (
