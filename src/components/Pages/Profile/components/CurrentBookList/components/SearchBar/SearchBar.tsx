@@ -31,13 +31,13 @@ export const SearchBar = () => {
         setSearchParams(searchParams);
         return;
       }
+    } else {
+      const entries = entriesHandler(searchParams);
+      setSearchParams({
+        ...entries,
+        search: debouncedSearchTerm,
+      });
     }
-
-    const entries = entriesHandler(searchParams);
-    setSearchParams({
-      ...entries,
-      search: debouncedSearchTerm,
-    });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debouncedSearchTerm]);

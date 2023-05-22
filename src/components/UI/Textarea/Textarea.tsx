@@ -1,6 +1,6 @@
 import { UseFormRegisterReturn } from 'react-hook-form';
 
-import classes from '../Input/Input.module.scss';
+import classes from '../Inputs/Inputs.module.scss';
 
 interface TextAreaProps {
   register: UseFormRegisterReturn;

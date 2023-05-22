@@ -9,7 +9,7 @@ import { useDispatch } from 'react-redux';
 import { addBook, AppDispatch, editBook, getBookById } from '../../store';
 import {
   Card,
-  Input,
+  FormInput,
   Button,
   Textarea,
   Dropdown,
@@ -119,14 +119,14 @@ export const ManageBookForm = ({ title, bookId, onClose }: BookFormProps) => {
                   rate={selectedRate}
                 />
               </div>
-              <Input
+              <FormInput
                 register={register('title')}
                 label="Title*"
                 id="title"
                 type="text"
                 error={errors?.title?.message}
               />
-              <Input
+              <FormInput
                 register={register('author')}
                 label="Author*"
                 id="author"
@@ -139,7 +139,7 @@ export const ManageBookForm = ({ title, bookId, onClose }: BookFormProps) => {
                   onStatusChange={setSelectedStatus}
                   defaultItem={selectedStatus}
                 />
-                <Input
+                <FormInput
                   register={register('date')}
                   label="Date*"
                   id="date"

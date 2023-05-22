@@ -2,23 +2,19 @@ import { useState } from 'react';
 
 import { UseFormRegisterReturn } from 'react-hook-form';
 
-import classes from './Input.module.scss';
+import classes from '../Inputs.module.scss';
 
-interface InputProps {
+interface FormInputProps {
   register?: UseFormRegisterReturn;
   label?: string;
   id: string;
   type: string;
   autoFocus?: boolean;
-  autoComplete?: string;
   placeholder?: string;
   error?: string;
-  onChange?: React.ChangeEventHandler<HTMLInputElement>;
-  onClick?: () => void;
-  value?: string;
 }
 
-export const Input = ({
+export const FormInput = ({
   register,
   label,
   id,
@@ -26,10 +22,7 @@ export const Input = ({
   autoFocus,
   placeholder,
   error,
-  onChange,
-  onClick,
-  value,
-}: InputProps) => {
+}: FormInputProps) => {
   const close = classes.input__iconEye;
   const open = classes.input__iconEye_open;
 
@@ -50,9 +43,6 @@ export const Input = ({
         placeholder={placeholder ? placeholder : ' '}
         className={classes.input__field}
         autoFocus={type === 'email' ? autoFocus : false}
-        autoComplete="off"
-        onChange={onChange}
-        value={value}
       />
       <label htmlFor={id} className={classes.input__label}>
         {label}
@@ -63,11 +53,6 @@ export const Input = ({
           className={eye === close ? close : open}
           onClick={toggleEye}
         ></button>
-      )}
-      {id === 'search' && !!value?.length && (
-        <button onClick={onClick} type="button" className={classes.input__del}>
-          ×
-        </button>
       )}
       {error && <p className={classes.input__error}>{error}</p>}
     </div>

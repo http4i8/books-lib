@@ -7,7 +7,7 @@ import { joiResolver } from '@hookform/resolvers/joi';
 import axios, { AxiosError } from 'axios';
 import useLocalStorage from '@rehooks/local-storage';
 
-import { Input, Button, Spinner } from '../../../UI';
+import { FormInput, Button, Spinner } from '../../../UI';
 
 import { BASE_URL } from '../../../../constants';
 import { routes } from '../../../../App/routes';
@@ -48,7 +48,7 @@ export const SignupForm = () => {
     register,
     handleSubmit,
     watch,
-    formState: { errors, isValid, isSubmitting },
+    formState: { errors, isValid, isDirty, isSubmitting },
   } = useForm<RegUser>({
     mode: 'onChange',
     resolver: joiResolver(schema),
@@ -103,23 +103,22 @@ export const SignupForm = () => {
       )}
       <form className={classes.form__field} onSubmit={handleSubmit(onSubmit)}>
         <div className={classes.form__data}>
-          <Input
+          <FormInput
             register={register('email')}
             label="Email"
             id="email"
             type="email"
             autoFocus
-            autoComplete="off"
             error={errors?.email?.message}
           />
-          <Input
+          <FormInput
             register={register('password')}
             label="Password"
             id="password"
             type="password"
             error={errors?.password?.message}
           />
-          <Input
+          <FormInput
             register={register('confirm')}
             label="Repeat password"
             id="confirm"
@@ -166,7 +165,7 @@ export const SignupForm = () => {
           </div>
         </div>
 
-        <Button type="submit" disabled={!isValid}>
+        <Button type="submit" disabled={!isDirty || !isValid}>
           {isSubmitting ? <Spinner /> : 'Sign up'}
         </Button>
       </form>

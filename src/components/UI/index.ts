@@ -1,6 +1,6 @@
 export * from './Container';
 export * from './Card';
-export * from './Input';
+export * from './Inputs';
 export * from './Button';
 export * from './StarsRating';
 export * from './Dropdown';

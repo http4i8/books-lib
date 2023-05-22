@@ -7,7 +7,7 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import Joi from 'joi';
 import { joiResolver } from '@hookform/resolvers/joi';
 
-import { Input, Button, Spinner } from '../../../UI';
+import { FormInput, Button, Spinner } from '../../../UI';
 
 import { routes } from '../../../../App/routes';
 import { BASE_URL } from '../../../../constants';
@@ -68,7 +68,7 @@ export const LoginForm = () => {
       )}
       <form className={classes.form__field} onSubmit={handleSubmit(onSubmit)}>
         <div className={classes.form__data}>
-          <Input
+          <FormInput
             register={register('email')}
             label="Email"
             id="email"
@@ -76,7 +76,7 @@ export const LoginForm = () => {
             autoFocus
             error={errors?.email?.message}
           />
-          <Input
+          <FormInput
             register={register('password')}
             label="Password"
             id="password"
