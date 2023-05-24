@@ -12,6 +12,13 @@
     align-items: center;
   }
 
+  &__title,
+  &__author {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
   &__score {
     text-align: center;
   }
