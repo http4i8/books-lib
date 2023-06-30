@@ -18,6 +18,7 @@ import {
   chartSelector,
   fetchChart,
 } from '../../../../../store';
+import { useUpdateEffect } from '../../../../../hooks';
 import { Card } from '../../../../UI';
 
 import classes from './Chart.module.scss';
@@ -76,10 +77,7 @@ export const Chart = () => {
 
   const date = '2023';
 
-  useEffect(() => {
-    dispatch(fetchChart());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [bookListData]);
+  useUpdateEffect(() => dispatch(fetchChart()), [bookListData]);
 
   useEffect(() => {
     setChart({
