@@ -68,11 +68,14 @@ export const deleteBook = (id: number) => async (dispatch: any) => {
 
 interface BooksListState {
   booksList: [];
+  totalPages: number;
 }
 
 const initialState = {
   booksList: [],
   loading: 'idle',
+  totalItems: 0,
+  totalPages: 0,
 } as BooksListState;
 
 const booksListSlice = createSlice({
@@ -82,6 +85,7 @@ const booksListSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchBooksList.fulfilled, (state, action) => {
       state.booksList = action.payload.list;
+      state.totalPages = action.payload.totalPages;
     });
   },
 });

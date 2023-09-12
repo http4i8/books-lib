@@ -6,7 +6,7 @@ const selectSelf = (state: RootState) => state;
 
 export const booksListSelector = createSelector(
   selectSelf,
-  (state) => state.booksList.booksList
+  (state) => state.booksList
 );
 
 export const changeListSelector = createSelector(

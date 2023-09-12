@@ -8,7 +8,7 @@ import {
   changeListSelector,
   fetchBooksList,
 } from '../../../../../store';
-import { BookCards, MobileBookCards, SearchBar } from './components';
+import { BookCards, MobileBookCards, SearchBar, BookPages } from './components';
 import { useViewport } from '../../../../../hooks';
 import { Card } from '../../../../UI';
 
@@ -16,15 +16,18 @@ import { entriesHandler } from '../../../../../utils/entriesHandler';
 import { BookRecord } from '../../../../../types';
 
 import classes from './CurrentBookList.module.scss';
+import { BookList } from '../../../../../types/bookList';
 
 interface BookProps {
-  data: BookRecord[];
+  bookList: BookList;
 }
 
-export const CurrentBookList: React.FC<BookProps> = ({ data }) => {
+export const CurrentBookList: React.FC<BookProps> = ({ bookList }) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const currentList = useSelector(changeListSelector);
+
+  const currentPage = searchParams.get('p');
 
   const { width } = useViewport();
   const breakpoint = 992;
@@ -32,14 +35,29 @@ export const CurrentBookList: React.FC<BookProps> = ({ data }) => {
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
+    let additionalEntries = {};
+
     const list = searchParams.get('list');
+    const p = searchParams.get('p');
+    const entries = entriesHandler(searchParams);
     if (!list) {
-      const entries = entriesHandler(searchParams);
-      setSearchParams({
-        ...entries,
+      additionalEntries = {
+        ...additionalEntries,
         list: '1',
-      });
+      };
     }
+
+    if (!p) {
+      additionalEntries = {
+        ...additionalEntries,
+        p: '1',
+      };
+    }
+
+    setSearchParams({
+      ...entries,
+      ...additionalEntries,
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -53,7 +71,7 @@ export const CurrentBookList: React.FC<BookProps> = ({ data }) => {
         <div className={classes.bookList__container}>
           <h2>{currentList.title}</h2>
           <SearchBar />
-          {data?.length === 0 ? (
+          {bookList?.booksList.length === 0 ? (
             <p className={classes.bookList__fallback}>Found no books.</p>
           ) : (
             <div className={classes.bookList__list}>
@@ -65,12 +83,16 @@ export const CurrentBookList: React.FC<BookProps> = ({ data }) => {
                 <div>Date</div>
               </div>
               {width >= breakpoint ? (
-                <BookCards data={data} />
+                <BookCards data={bookList.booksList} />
               ) : (
-                <MobileBookCards data={data} />
+                <MobileBookCards data={bookList.booksList} />
               )}
             </div>
           )}
+          <BookPages
+            current={+(currentPage || 1)}
+            pages={bookList.totalPages}
+          />
         </div>
       </Card>
     </div>

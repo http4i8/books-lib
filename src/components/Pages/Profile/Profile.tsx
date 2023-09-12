@@ -41,7 +41,7 @@ export const Profile = () => {
             <Chart />
           </div>
           <div className={classes.profile__list}>
-            <CurrentBookList data={bookList} />
+            <CurrentBookList bookList={bookList} />
           </div>
         </main>
       </div>

@@ -1,3 +1,4 @@
+import { useSearchParams } from 'react-router-dom';
 import { Rating } from 'react-simple-star-rating';
 
 import { BookRecord } from '../../../../../../../types/bookRecord';
@@ -11,12 +12,17 @@ interface BookProps {
 }
 
 export const BookCards: React.FC<BookProps> = ({ data }) => {
+  const [searchParams] = useSearchParams();
+  const currentPage = searchParams.get('p');
+
   return (
     <div className={classes.bookCard}>
       {data?.map((item, index) => (
         <div key={item.id} className={classes.bookCard__block}>
           <div className={classes.bookCard__booksInfo}>
-            <div className={classes.bookCard__counter}>{index + 1}</div>
+            <div className={classes.bookCard__counter}>
+              {+(currentPage || 1) * 10 - 10 + index + 1}.
+            </div>
             <div className={classes.bookCard__title}>{item.title}</div>
             <div className={classes.bookCard__author}>{item.author}</div>
             <div className={classes.bookCard__score}>

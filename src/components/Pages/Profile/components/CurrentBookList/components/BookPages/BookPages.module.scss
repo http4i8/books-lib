@@ -1,0 +1,12 @@
+.pages {
+  display: flex;
+}
+
+.page {
+  padding: 5px;
+  cursor: pointer;
+}
+
+.current {
+  color: white;
+}

@@ -1,3 +1,5 @@
+import { useSearchParams } from 'react-router-dom';
+
 import { Rating } from 'react-simple-star-rating';
 
 import { BookEditBlock } from '../BookEditBlock/BookEditBlock';
@@ -12,6 +14,9 @@ interface BookProps {
 }
 
 export const MobileBookCards: React.FC<BookProps> = ({ data }) => {
+  const [searchParams] = useSearchParams();
+  const currentPage = searchParams.get('p');
+
   return (
     <div className={classes.bookCard}>
       {data?.map((item, index) => (
@@ -22,7 +27,9 @@ export const MobileBookCards: React.FC<BookProps> = ({ data }) => {
             </div>
             <BookEditBlock bookId={item.id} />
             <div className={classes.bookCard__titleBlock}>
-              <span className={classes.bookCard__counter}>{index + 1}.</span>
+              <span className={classes.bookCard__counter}>
+                {+(currentPage || 1) * 10 - 10 + index + 1}.
+              </span>
               <span className={classes.bookCard__title}>{item.title}</span>
             </div>
             <div className={classes.bookCard__author}>{item.author}</div>
